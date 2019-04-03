@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: yes
+  become: true
+  roles:
+    - hello_web
+    - git
+    - java
+    - jenkins
+    - gitea  

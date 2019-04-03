@@ -1,0 +1,5 @@
+.vagrant
+jenkins_home
+*.retry
+*/__pycache__
+*.pyc
