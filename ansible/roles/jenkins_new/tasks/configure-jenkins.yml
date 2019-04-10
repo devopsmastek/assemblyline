@@ -1,0 +1,59 @@
+---
+
+- name: Configuration file is up to date (config.xml)
+  template:
+    src: "{{ jenkins_source_config_xml }}"
+    dest: "{{ jenkins_home }}/config.xml"
+    mode: 0644
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
+
+- name: Configure Jenkins location
+  template:
+    src: files/jenkins.model.JenkinsLocationConfiguration.xml.j2
+    dest: "{{ jenkins_home }}/jenkins.model.JenkinsLocationConfiguration.xml"
+    mode: 0644
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
+
+- name: Create intermediate dirs for custom files
+  file:
+    path: "{{ jenkins_home }}/{{ item.dest | dirname }}"
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
+    mode: 0755
+    state: directory
+  when: jenkins_include_custom_files
+  with_items: "{{ jenkins_custom_files }}"
+
+- name: Configure custom files
+  template:
+    src: "{{ jenkins_source_dir_configs }}/{{ item.src }}"
+    dest: "{{ jenkins_home }}/{{ item.dest }}"
+    mode: 0644
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
+  when: jenkins_include_custom_files
+  with_items: "{{ jenkins_custom_files }}"
+
+- name: Proxy Configuration file is up to date (proxy.xml)
+  template:
+    src: "{{ jenkins_source_proxy_xml }}"
+    dest: "{{ jenkins_home }}/proxy.xml"
+    mode: 0644
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}" 
+    
+- name: Update Center Configuration file is up to date (hudson.model.UpdateCenter.xml)
+  template:
+    src: "{{ hudson_model_update_center_xml }}"
+    dest: "{{ jenkins_home }}/hudson.model.UpdateCenter.xml"
+    mode: 0644
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}" 
+
+#- name: set permissions on secrets dir
+#  file:
+#    path: "{{ jenkins_home }}/secrets"
+#    mode: 0700
+#  when: jenkins_include_secrets

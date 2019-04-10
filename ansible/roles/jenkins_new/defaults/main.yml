@@ -1,0 +1,82 @@
+---
+
+jenkins_version: "2.73.1" # The exact version of jenkins to deploy
+
+jenkins_url: "http://127.0.0.1" # The url that Jenkins will be accessible on
+jenkins_port: "8080" # The port that Jenkins will listen on
+#jenkins_home: /vagrant/provisioner/jenkins-configs/jenkins
+jenkins_home: /data/jenkins # The directory on the server where the Jenkins configs will live
+jenkins_admin: "admin@example.com" # The admininstrator email address for the Jenkins server
+
+jenkins_install_via: "apt"
+jenkins_jobs:
+  - "my-first-job"
+  - "amigo"
+  - "portal-stbwebre"
+jenkins_include_secrets: true
+jenkins_include_custom_files: true
+
+# If you need to override any java options then do that here.
+jenkins_java_opts: "-Djenkins.install.runSetupWizard=false"
+
+# Configuration files owner and group
+jenkins_config_owner: "ubuntu"
+jenkins_config_group: "ubuntu"
+
+# The locations of the configuration files for jenkins
+jenkins_source_dir_configs: "{{ playbook_dir }}/jenkins-configs"
+jenkins_source_dir_jobs: "{{ jenkins_source_dir_configs }}/jobs"
+
+# config.xml template source
+jenkins_source_config_xml: "{{ jenkins_source_dir_configs }}/config.xml"
+
+# proxy.xml template source
+jenkins_source_proxy_xml: "{{ jenkins_source_dir_configs }}/proxy.xml"
+
+# Update Center source
+hudson_model_update_center_xml: "{{ jenkins_source_dir_configs }}/hudson.model.UpdateCenter.xml"
+
+# plugins source
+jenkins_plugins_source: "{{ jenkins_source_dir_configs }}/plugins"
+
+# Include custom files for jenkins installation
+jenkins_include_custom_files: false
+jenkins_custom_files: {} # src and dest names
+
+# Include secrets directory during installation
+jenkins_include_secrets: false
+jenkins_source_secrets: "{{ jenkins_source_dir_configs }}/secrets/"
+
+# The names of the jobs (config.xml must exist under jenkins_source_dir_jobs/job_name/)
+jenkins_jobs: []
+
+# These plugins will be installed in the jenkins instance
+jenkins_plugins:
+  - git
+  - matrix-project
+  - junit
+  - workflow-api
+  - scm-api
+  - git-client
+  - jsch
+  - ssh-credentials
+  - credentials
+  - workflow-scm-step
+  - workflow-step-api
+  - workflow-multibranch
+
+# List of sources of custom jenkins plugins to install
+#jenkins_custom_plugins: []
+
+
+#############################################
+# Apt vars: apply to deploying via apt only #
+#############################################
+
+# Packages which are to be installed on the jenkins instance
+jenkins_apt_packages: "openjdk-8-jdk"
+
+# Java version to use. Note that JDK 8 is required for Jenkins
+# 2.54 or greater.
+jenkins_java_version: "java-1.8.0-openjdk-amd64"
+
