@@ -6,7 +6,7 @@
   register: adminpasswordfile
   no_log: true
   when: jenkins_admin_password_file != ""
-  tags: ['skip_ansible_lint']
+#  tags: ['skip_ansible_lint']
 
 - name: Set Jenkins admin password fact.
   set_fact:
@@ -54,7 +54,7 @@
   with_items: "{{ jenkins_plugins }}"
   when: jenkins_admin_password != ""
   notify: restart jenkins
-  tags: ['skip_ansible_lint']
+  #  tags: ['skip_ansible_lint']
   register: plugin_result
   until: plugin_result is success
   retries: 3
