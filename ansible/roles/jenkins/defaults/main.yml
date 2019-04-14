@@ -16,7 +16,60 @@ jenkins_jar_location: /opt/jenkins-cli.jar
 jenkins_url_prefix: ""
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
 
-jenkins_plugins: []
+jenkins_plugins:
+  - git
+  - pipeline
+  - pipeline-milestone-step
+  - jackson2-api
+  - pipeline-input-step
+  - pipeline-graph-analysis
+  - pipeline-rest-api
+  - handlebars
+  - momentjs
+  - pipeline-stage-step
+  - pipeline-stage-view
+  - pipeline-stage-tags-metadata
+  - plain-credentials
+  - credentials-binding
+  - pipeline-model-api
+  - pipeline-model-declarative-agent
+  - git-server
+  - shared-objects
+  - shared-workspace
+  - groovy
+  - groovy-remote
+  - groovy-postbuild
+  - groovy-label-assignment
+  - groovy-events-listener-plugin
+  - groovy-events-listener-plugin-master
+  - authentication-tokens
+  - docker-commons
+  - durable-task
+  - pipeline-stage-tags-metadata
+  - lockable-resources
+  - pipeline
+  - matrix-project
+  - junit
+  - workflow-api
+  - scm-api
+  - git-client
+  - jsch
+  - ssh-credentials
+  - credentials
+  - workflow-scm-step
+  - workflow-step-api
+  - workflow-multibranch
+  - nexus-artifact-uploader
+  - Pipeline
+  - pipeline-stage-step
+  - pipeline-multibranch-defaults
+  - dashboard-view
+  - view-job-filters
+  - job-dsl
+  - build-pipeline-plugin
+  - jenkins-multijob-plugin
+  - build-pipeline-plugin
+
 jenkins_plugins_state: present
 jenkins_plugin_updates_expiration: 86400
 jenkins_plugin_timeout: 30
