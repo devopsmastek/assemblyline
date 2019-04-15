@@ -6,17 +6,17 @@
   become_method: sudo
   gather_facts: yes
   roles:
-    - role: hello_web
-      become: yes
-    - role: git
-      become: yes
+          #    - role: hello_web
+          #      become: yes
+          #    - role: git
+          #      become: yes
     - role: java
       become: yes
-    - role: jenkins
-      become: yes
-    - role: mysql
-      become: yes
+          #    - role: jenkins
+          #      become: yes
+          #    - role: mysql
+          #      become: yes
     - role: sonar
       becomes: yes
-    - role: nexus
-      become: yes
+      #    - role: nexus
+      #      become: yes

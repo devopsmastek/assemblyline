@@ -69,6 +69,8 @@ jenkins_plugins:
   - build-pipeline-plugin
   - jenkins-multijob-plugin
   - build-pipeline-plugin
+  - sonar-quality-gates
+  - codescanner  
 
 jenkins_plugins_state: present
 jenkins_plugin_updates_expiration: 86400
