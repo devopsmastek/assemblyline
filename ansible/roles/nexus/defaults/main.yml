@@ -1,6 +1,6 @@
 ---
 # defaults file for ansible-nexus
-nexus_download_dir: '/tmp'
+nexus_download_dir: '/vagrant'
 nexus_version: 'latest'
 #nexus_version: '2.10.0-02'
 nexus_package: 'nexus-{{ nexus_version }}-bundle.tar.gz'

@@ -4,11 +4,15 @@ After=network.target network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/sonar start
-ExecStop=/usr/bin/sonar stop
-ExecReload=/usr/bin/sonar restart
-PIDFile=/usr/local/sonar/bin/linux-x86-64/./SonarQube.pid
-Type=simple
+type=simple
+User=sonar
+Group=sonar
+WorkingDirectory=/usr/local/sonar
+
+ExecStart=/usr/local/sonar/bin/linux-x86-64/sonar.sh start
+ExecStop=/usr/local/sonar/bin/linux-x86-64/sonar.sh stop
+ExecReload=/usr/local/sonar/bin/linux-x86-64/sonar.sh restart
+PIDFile=/usr/local/sonar/bin/linux-x86-64/SonarQube.pid
 
 [Install]
 WantedBy=multi-user.target

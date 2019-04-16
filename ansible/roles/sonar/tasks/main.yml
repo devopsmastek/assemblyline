@@ -17,6 +17,16 @@
     name: unzip
     state: latest
 
+- name: Create a login user
+  user:
+    name: sonar
+    groups: sonar
+    state: present
+    shell: /bin/bash       # Defaults to /bin/bash
+    system: no             # Defaults to no
+    createhome: yes        # Defaults to yes
+    home: /usr/local/sonar  # Defaults to /home/<username>
+
 - name: Download Sonar.
   get_url:
     url: "{{ sonar_download_url }}"
@@ -48,7 +58,21 @@
     src: /usr/local/sonar/bin/linux-x86-64/sonar.sh
     dest: /usr/bin/sonar
     state: link
+    owner: sonar
+    group: sonar
   register: sonar_symlink
+
+- name: Change sonar.sh file permission and ownership
+  file:
+    path: /usr/local/sonar
+    # when specifying mode using octal numbers, add a leading 0
+    state: directory
+    recurse: yes
+    mode: 0775
+    owner: sonar
+    group: sonar
+
+
 
 - name: Add sonar as init script for service management.
   file:
@@ -73,6 +97,12 @@
   pause: seconds=180
   when: sonar_symlink.changed
   tags: ['skip_ansible_lint']
+
+- name: restart service sonar and issue daemon-reload to pick up config changes
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: sonar
 
 - name: Make sure Sonar is responding on the configured port.
   wait_for: port=9000 delay=3 timeout=300

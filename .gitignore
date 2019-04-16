@@ -3,3 +3,5 @@ jenkins_home
 *.retry
 */__pycache__
 *.pyc
+*.zip
+*.tar.gz

@@ -105,20 +105,46 @@
   notify:
     - 'restart nexus'
 
-- name: Copy the /etc/init.d/nexus file
-  template: src=init-nexus.j2 dest=/etc/init.d/nexus owner=root group=root mode=0755 backup=yes
-#  when: ansible_os_family == "RedHat"
-  notify:
-    - 'restart nexus'
+- name: Symlink nexus bin.
+  file:
+    src="{{ nexus_installation_dir }}/nexus-{{ nexus_version }}/bin/nexus"
+    dest="/usr/bin/nexus"
+    state=link
+  register: nexus_symlink
 
-- name: Register service with systemconfig
-  systemd: 
-    name: nexus
-    state: started
-#    enabled: yes
-#  when: ansible_os_family == "RedHat"
 
-#- name: Set service start/stop order
-#  sudo: yes
-#  command: chkconfig nexus reset
-#  when: ansible_os_family == "RedHat"
+  #- name: Add nexus as init script for service management.
+  #  file:
+  #  src="{{ nexus_installation_dir }}/nexus-{{ nexus_version }}/bin/nexus"
+  #  dest="/etc/init.d/nexus"
+  #  state=link
+  #when: "ansible_service_mgr != 'systemd'"
+
+- name: Copy Nexus systemd unit file into place (for systemd systems).
+  template:
+    src: nexus.service.j2
+    dest: /etc/systemd/system/nexus.service
+    owner: root
+    group: root
+    mode: 0755
+  when: "ansible_service_mgr == 'systemd'"
+
+- name: restart service sonar and issue daemon-reload to pick up config changes
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: sonar
+
+    #- name: Ensure nexus is running and set to start on boot.
+    #  service: name=nexus state=started enabled=yes
+
+- name: Allow nexus time to build on first start.
+  pause: seconds=180
+  when: nexus_symlink.changed
+  tags: ['skip_ansible_lint']
+
+- name: Make sure nexus is responding on the configured port.
+  wait_for: port=" {{ nexus_port}} " delay=3 timeout=300
+
+
+
