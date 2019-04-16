@@ -129,11 +129,11 @@
     mode: 0755
   when: "ansible_service_mgr == 'systemd'"
 
-- name: restart service sonar and issue daemon-reload to pick up config changes
+- name: restart service nexus and issue daemon-reload to pick up config changes
   systemd:
     state: restarted
     daemon_reload: yes
-    name: sonar
+    name: nexus
 
     #- name: Ensure nexus is running and set to start on boot.
     #  service: name=nexus state=started enabled=yes
