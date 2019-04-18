@@ -8,6 +8,7 @@
   mysql_user:
     name: "{{ sonar_mysql_username }}"
     host: "{{ item }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
     priv: "{{ sonar_mysql_database }}.*:ALL"
     password: "{{ sonar_mysql_password }}"
   with_items: "{{ sonar_mysql_allowed_hosts }}"
