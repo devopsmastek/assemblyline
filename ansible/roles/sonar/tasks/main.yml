@@ -1,7 +1,7 @@
 ---
 - name: Create a database for Sonar.
   mysql_db:
-    name: "{{ sonar_mysql_database }}"
+    name: "{{ sonar_mysql_database }} login_user={{ sonar_mysql_username }} login_password={{ sonar_mysql_password }}"
     state: present
 
 - name: Create a sonar user.
