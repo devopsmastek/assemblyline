@@ -20,3 +20,5 @@
       becomes: yes
     - role: nexus
       become: yes
+    - role: ansible-hubot
+      become: yes
