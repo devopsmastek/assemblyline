@@ -2,7 +2,14 @@
 - name: Create a database for Sonar.
   mysql_db:
     login_unix_socket: /var/run/mysqld/mysqld.sock
-    name: "{{ sonar_mysql_database }} login_user={{ sonar_mysql_username }} login_password={{ sonar_mysql_password }}"
+    name: "{{ sonar_mysql_database }}"
+    login_user: "{{ sonar_mysql_username }}"
+    login_password: "{{ sonar_mysql_password }}"
+    state: present
+
+- name: Ensure group "sonar" exists
+  group:
+    name: sonar
     state: present
 
 - name: Create a sonar user.
