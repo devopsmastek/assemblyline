@@ -32,6 +32,7 @@ jenkins_plugins:
   - command-launcher
   - conditional-buildstep
   - config-file-provider
+  - configuration-as-codes
   - credentials-binding
   - credentials
   - dashboard-view

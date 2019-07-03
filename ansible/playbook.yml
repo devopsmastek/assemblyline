@@ -22,4 +22,5 @@
       become: yes
     - role: tomcat8
       become: yes   
-    
+    - role: jenkins_config
+	  become:yes
