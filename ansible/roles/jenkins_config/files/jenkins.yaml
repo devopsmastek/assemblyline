@@ -1,0 +1,102 @@
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy: "loggedInUsersCanDoAnything"
+  disableRememberMe: false
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  numExecutors: 2
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: false
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "admin"
+  slaveAgentPort: 0
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  downloadSettings:
+    useBrowser: false
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: true
+  sSHD:
+    port: -1
+unclassified:
+  badgePlugin:
+    disableFormatHTML: false
+  casCGlobalConfig:
+    configurationPath: "/var/lib/jenkins/jenkins.yaml"
+  gitSCM:
+    createAccountBasedOnEmail: false
+  globalEventsPlugin:
+    disableSynchronization: false
+    onEventGroovyCode: "log.info(\"Fired event '${event}'.\")"
+  location:
+    adminAddress: "address not configured yet <nobody@nowhere>"
+  mailer:
+    adminAddress: "address not configured yet <nobody@nowhere>"
+    charset: "UTF-8"
+    useSsl: false
+  mavenModuleSet:
+    localRepository: "default"
+  pollSCM:
+    pollingThreadCount: 10
+  sonarGlobalConfiguration:
+    buildWrapperEnabled: false
+tool:
+  ant:
+    defaultProperties:
+    - installSource:
+        installers:
+        - "antFromApache"
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  groovyInstallation:
+    defaultProperties:
+    - installSource:
+        installers:
+        - "groovyInstaller"
+  jdk:
+    defaultProperties:
+    - installSource:
+        installers:
+        - jdkInstaller:
+            acceptLicense: false
+  maven:
+    defaultProperties:
+    - installSource:
+        installers:
+        - "maven"
+  msBuildSQRunnerInstallation:
+    defaultProperties:
+    - installSource:
+        installers:
+        - "msBuildSonarQubeRunnerInstaller"
+  sonarRunnerInstallation:
+    defaultProperties:
+    - installSource:
+        installers:
+        - "sonarRunnerInstaller"

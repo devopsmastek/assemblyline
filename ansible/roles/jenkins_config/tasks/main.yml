@@ -1,0 +1,4 @@
+- name: Copy Jenkins Configuration File
+  copy:
+    src: "{{ role_path }}/files/jenkins.yaml"
+    dest: "/var/lib/jenkins/jenkins.yaml"
