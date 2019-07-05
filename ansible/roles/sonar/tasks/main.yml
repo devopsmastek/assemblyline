@@ -3,8 +3,8 @@
   mysql_db:
     login_unix_socket: /var/run/mysqld/mysqld.sock
     name: "{{ sonar_mysql_database }}"
-    login_user: "{{ sonar_mysql_username }}"
-    login_password: "{{ sonar_mysql_password }}"
+    login_user: "{{ sonar_root_username }}"
+    login_password: "{{ sonar_root_password }}"
     state: present
 
 - name: Ensure group "sonar" exists

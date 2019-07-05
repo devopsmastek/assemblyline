@@ -11,6 +11,8 @@ sonar_version_directory: "sonarqube-{{ sonar_version }}"
 sonar_web_context: ''
 
 # MySQL database connection details.
+sonar_root_username: root
+sonar_root_password: root
 sonar_mysql_username: sonar
 sonar_mysql_password: sonar
 
