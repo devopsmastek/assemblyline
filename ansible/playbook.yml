@@ -24,3 +24,5 @@
       become: yes   
     - role: jenkins_config
       become: yes
+    - role: ansible-role-maven
+      become: yes
