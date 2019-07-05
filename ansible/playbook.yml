@@ -12,6 +12,8 @@
       become: yes
     - role: java
       become: yes
+    - role: ansible-role-maven
+      become: yes
     - role: jenkins
       become: yes
     - role: mysql
@@ -24,5 +26,4 @@
       become: yes   
     - role: jenkins_config
       become: yes
-    - role: ansible-role-maven
-      become: yes
+    
