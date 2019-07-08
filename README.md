@@ -1,3 +1,6 @@
+# TO DO TASK
+1. add jacoco code coverage in pipline 
+
 # Environment Provisioning and DevOps Setup using Vagrant & Ansible
 
 Vagrant provides abiltiy to create VM via a simple script file, Vagrantfile, wherein we define the configuration details for the virtual machine that we want to create. Vagrant also integrates with ansible very well and facilitates the execution of ansible playbooks from the vagrant script. Hence, once the environment provisioning in completed, vagrant invokes ansible playbooks to install and configure the desired tool stack identified in roles.
