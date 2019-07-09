@@ -1,47 +1,20 @@
 jenkins:
-  agentProtocols:
-  - "JNLP4-connect"
-  - "Ping"
-  authorizationStrategy: "loggedInUsersCanDoAnything"
-  disableRememberMe: false
-  markupFormatter: "plainText"
-  mode: NORMAL
-  myViewsTabBar: "standard"
-  numExecutors: 2
-  primaryView:
-    all:
-      name: "all"
-  projectNamingStrategy: "standard"
-  quietPeriod: 5
-  remotingSecurity:
-    enabled: false
-  scmCheckoutRetryCount: 0
-  securityRealm:
-    local:
-      allowsSignup: false
-      enableCaptcha: false
-      users:
-      - id: "admin"
-  slaveAgentPort: 0
-  updateCenter:
-    sites:
-    - id: "default"
-      url: "https://updates.jenkins.io/update-center.json"
-  views:
-  - all:
-      name: "all"
-  viewsTabBar: "standard"
+    authorizationStrategy: "loggedInUsersCanDoAnything"
+    disableRememberMe: false
+    markupFormatter: "plainText"
+    mode: NORMAL
+    myViewsTabBar: "standard"
 security:
-  apiToken:
-    creationOfLegacyTokenEnabled: false
-    tokenGenerationOnCreationEnabled: false
-    usageStatisticsEnabled: true
-  downloadSettings:
-    useBrowser: false
-  globalJobDslSecurityConfiguration:
-    useScriptSecurity: true
-  sSHD:
-    port: -1
+    apiToken:
+        creationOfLegacyTokenEnabled: false
+        tokenGenerationOnCreationEnabled: false
+        usageStatisticsEnabled: true
+    downloadSettings:
+        useBrowser: false
+    globalJobDslSecurityConfiguration:
+        useScriptSecurity: true
+    sSHD:
+        port: -1
 unclassified:
   badgePlugin:
     disableFormatHTML: false
@@ -85,11 +58,11 @@ tool:
         installers:
         - jdkInstaller:
             acceptLicense: false
-  maven:
-    defaultProperties:
-    - installSource:
-        installers:
-        - "maven"
+  #maven:
+    #defaultProperties:
+    #- installSource:
+        #installers:
+        #- "maven"
   msBuildSQRunnerInstallation:
     defaultProperties:
     - installSource:
@@ -100,3 +73,24 @@ tool:
     - installSource:
         installers:
         - "sonarRunnerInstaller"
+jobs:
+  - script: >
+      folder('testjobs')
+  - script: >
+      pipelineJob('testjobs/default-agent') {
+        definition {
+          cps {
+            script("""\
+              pipeline {
+                agent any
+                stages {
+                  stage ('test') {
+                    steps {
+                      echo "hello"
+                    }
+                  }
+                }
+              }""".stripIndent())
+          }
+        }
+      }          
