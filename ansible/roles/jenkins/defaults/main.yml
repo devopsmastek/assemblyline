@@ -1,7 +1,7 @@
 ---
 # Optional method of pinning a specific version of Jenkins and/or overriding the
 # default Jenkins packaging URL.
-jenkins_version: "2.176.1"
+jenkins_version: "2.176"
 # jenkins_pkg_url: "https://www.example.com"
 
 # Change this to `latest` to update Jenkins if a newer version is available.
@@ -54,6 +54,7 @@ jenkins_plugins:
   - groovy-remote
   - handlebars
   - jackson2-api
+  - jacoco  
   - javadoc
   - jdk-tool
   - jenkins-multijob-plugin
@@ -70,6 +71,7 @@ jenkins_plugins:
   - maven-plugin
   - momentjs
   - nexus-artifact-uploader
+  - nexus-jenkins-plugin  
   - pam-auth
   - parameterized-trigger
   - pipeline-build-step
