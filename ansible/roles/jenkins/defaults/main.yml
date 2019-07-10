@@ -112,6 +112,7 @@ jenkins_plugins:
   - workflow-step-api
   - workflow-support
   - pipeline
+  - GitHub Integration Plugin
 
 jenkins_plugins_state: present
 jenkins_plugin_updates_expiration: 86400
