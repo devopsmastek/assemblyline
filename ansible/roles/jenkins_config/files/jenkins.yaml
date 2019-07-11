@@ -1,9 +1,16 @@
 jenkins:
+    systemMessage: "Welcome to Jenkins Config"    
     authorizationStrategy: "loggedInUsersCanDoAnything"
     disableRememberMe: false
     markupFormatter: "plainText"
     mode: NORMAL
     myViewsTabBar: "standard"
+    securityRealm:
+      local:
+        allowsSignup: false
+        users:
+          - id: "admin_casc"
+            password: "somethingsecret"
 security:
     apiToken:
         creationOfLegacyTokenEnabled: false
@@ -36,28 +43,49 @@ unclassified:
   pollSCM:
     pollingThreadCount: 10
   sonarGlobalConfiguration:
-    buildWrapperEnabled: false
+    buildWrapperEnabled: true
+    installations: 
+      - name: sonarqube 
+        serverUrl: http://localhost:9000/sq
+        additionalAnalysisProperties:
+        additionalProperties:
+        triggers:
 tool:
   ant:
     defaultProperties:
     - installSource:
         installers:
         - "antFromApache"
+  maven:
+    settingsProvider:
+      filePath:
+        path: /usr/share/maven-settings.xml
+    installations:
+    - name: "maven"
+      home: /usr/share/maven
+      properties:
+      - installSource:
+          installers:
+          - maven:
+              id: "3.5.0"        
   git:
     installations:
-    - home: "git"
-      name: "Default"
+    - home: "/usr/bin/git"
+      name: "git"
   groovyInstallation:
     defaultProperties:
     - installSource:
         installers:
         - "groovyInstaller"
   jdk:
-    defaultProperties:
-    - installSource:
-        installers:
-        - jdkInstaller:
-            acceptLicense: false
+    installations:      
+    - name: "Java"
+      home: "/usr/lib/jvm/java-8-openjdk-amd64/"    
+    #defaultProperties:
+    #- installSource:
+    #installers:
+    # - jdkInstaller:
+    #acceptLicense: false
   #maven:
     #defaultProperties:
     #- installSource:
